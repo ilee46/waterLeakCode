@@ -7,6 +7,7 @@ GPIO.setmode(GPIO.BCM) # This configures us to set modes using
 GPIO.setup(buzzerPinNum, GPIO.OUT) # This configures the buzzer as an output
 
 
+#Function that sounds the buzzer
 def soundAlarm():
     BuzzerOp = GPIO.PWM(buzzerPinNum, 200)
     BuzzerOp.start(75)
