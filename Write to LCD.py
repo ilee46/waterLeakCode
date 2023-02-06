@@ -1,7 +1,18 @@
-//Install libraries
-//sudo apt-get install python-pip
-//sudo pip install RPLCD
+#Install libraries
+#sudo apt-get install python-pip
+#sudo pip install RPLCD
 
-from RPLCD import CharLCD
-lcd = CharLCD(cols=16, rows=2, pin_rs=37, pin_e=35, pins_data=[33, 31, 29, 23])
-lcd.write_string(u'Hello world!')
+import time        
+from rpi_lcd import I2C
+
+seconds = 0
+
+lcd = LCD()
+
+def writeToDisplay():
+    lcd.text("Testing",0,0)
+    lcd.text(str(seconds),1,0)
+    lcd.text("Testing",1,2)
+    second = second + 1
+    time.sleep()
+    
