@@ -13,4 +13,4 @@ def conversion(f_h264, f_mp4):
 # MP4 is needed for OpenCV format
 #'sudo apt install -y gpac'
 
-convert('home/pi/test.h264',''home/pi/test.mp4')
+conversion('home/pi/test.h264', 'home/pi/test.mp4')
