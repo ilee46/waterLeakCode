@@ -3,16 +3,16 @@
 #sudo pip install RPLCD
 
 import time        
-from rpi_lcd import I2C
+from RPi_GPIO_i2c_LCD import lcd
 
+#Intialize our I2C Display
+
+
+lcdDisplay = lcd.HD44780(0x27)
 seconds = 0
-
-lcd = LCD()
-
-def writeToDisplay():
-    lcd.text("Testing",0,0)
-    lcd.text(str(seconds),1,0)
-    lcd.text("Testing",1,2)
-    second = second + 1
-    time.sleep()
     
+while 1:
+    seconds = seconds + 1
+    lcdDisplay.set("Testing",1)
+    lcdDisplay.set(seconds,2)
+    time.sleep(1)
