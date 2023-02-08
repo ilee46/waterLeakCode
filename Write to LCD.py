@@ -15,4 +15,10 @@ while 1:
     seconds = seconds + 1
     lcdDisplay.set("Testing",1)
     lcdDisplay.set(seconds,2)
+    lcdDisplay.set("Flow rate:",3)
+    lcdDisplay.set("0 L/Min",4)
     time.sleep(1)
+    
+    #int pin15 = 
+    #X = pulseIn(pin15,HIGH);
+    #Y = pulseIn(pin15,LOW);
