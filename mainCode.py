@@ -8,10 +8,15 @@ seconds = 0
 waterFlowPin = 13
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(waterFlowPin, GPIO.IN)
+buzzerPinNum = 12 # This is the GPIO pin for the buzzer
+GPIO.setwarnings(False) # This disables GPIO warnings
+GPIO.setmode(GPIO.BCM) # This configures us to set modes using  
+GPIO.setup(buzzerPinNum, GPIO.OUT)
 minutes = 0
 constant = 0.006
 time_new = 0.0
 rpt_int = 10
+potentialLeakPresent = False
 
 global rate_count, tot_count
 rate_count = 0
@@ -30,6 +35,13 @@ print('Water Flow - Approximate ', str(time.asctime(time.localtime(time.time()))
 rpt_int = int(input('Input desired report interval in seconds '))
 print('Reports every ', rpt_int,' seconds')
 print('Control C to exit')
+
+def soundAlarm():
+    BuzzerOp = GPIO.PWM(buzzerPinNum, 200)
+    BuzzerOp.start(75)
+    time.sleep(1)
+    BuzzerOp.stop()
+    time.sleep(1)
 
 while True:
     time_new = time.time()+rpt_int
@@ -58,6 +70,16 @@ while True:
     lcdDisplay.set("Liters/Minute", 4)
     time.sleep(1)
     
+    if (LperM < 10 or LperM > 25):
+        potentialLeakPresent = True
+    
+    if (LperM < 1):
+        potentialLeakPresent = False
+        print('No flow')
+        
+    if (potentialLeakPresent):
+        soundAlarm()
+        
 GPIO.cleanup()
 print('Done')
 
