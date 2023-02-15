@@ -1,16 +1,18 @@
-from picamera import Picamera
+from picamera import PiCamera
 from subprocess import call 
 
 camera = PiCamera()
 def conversion(f_h264, f_mp4):
-  camera.start_recording('home/pi/test.h264')
-  camera.stop_recording()
-  command = "MP4Box -add " + f_h264 + " " + f_mp4
-  call([command], shell=true)
+    camera.resolution = (640,480)
+    camera.start_recording('home/ianlee/test2.h264')
+    camera.wait_recording(10)
+    camera.stop_recording()
+    command = "MP4Box -add " + f_h264 + " " + f_mp4 #translates to "MP4Box - add + f_h264 + f_m" 
+    call([command], shell = True)
   
   
 #convert .h264 to .MP4 with MP4box
 # MP4 is needed for OpenCV format
-#'sudo apt install -y gpac'
+#'sudo sudo apt-get install -y gpac
 
-conversion('home/pi/test.h264', 'home/pi/test.mp4')
+conversion('home/ianlee/test2.h264', 'home/ianlee/test2.mp4')
