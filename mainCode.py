@@ -54,7 +54,8 @@ while True:
     print('Time (min & clock) ', minutes, '\t', time.asctime(time.localtime(time.time())),'\n')
     lcdDisplay.set("Water Reporting",1)
     lcdDisplay.set("Flow Rate:",2)
-    lcdDisplay.set(str(LperM) + " L/Min", 3)
+    lcdDisplay.set(str(LperM), 3)
+    lcdDisplay.set("Liters/Minute", 4)
     time.sleep(1)
     
 GPIO.cleanup()
