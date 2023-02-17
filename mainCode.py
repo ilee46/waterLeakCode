@@ -38,7 +38,7 @@ print('Control C to exit')
 
 def soundAlarm():
     BuzzerOp = GPIO.PWM(buzzerPinNum, 200)
-    BuzzerOp.start(75)
+    BuzzerOp.start(90)
     time.sleep(1)
     BuzzerOp.stop()
     time.sleep(1)
