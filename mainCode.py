@@ -1,17 +1,17 @@
 import RPi.GPIO as GPIO # Imports the GPIO library
-from RPi_GPIO_i2c_LCD import lcd
+from RPi_GPIO_i2c_LCD import lcd # Imports the LCD library
 import time, sys # Imports the time library
 GPIO.setwarnings(False)
 
 lcdDisplay = lcd.HD44780(0x27)
 seconds = 0
-waterFlowPin = 13
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(waterFlowPin, GPIO.IN)
+waterFlowPin = 13 # This is the GPIO pin for the water flow sensor
+GPIO.setmode(GPIO.BCM) 
+GPIO.setup(waterFlowPin, GPIO.IN) # This configures the water flow sensor as an input device
 buzzerPinNum = 12 # This is the GPIO pin for the buzzer
 GPIO.setwarnings(False) # This disables GPIO warnings
 GPIO.setmode(GPIO.BCM) # This configures us to set modes using  
-GPIO.setup(buzzerPinNum, GPIO.OUT)
+GPIO.setup(buzzerPinNum, GPIO.OUT) # This configures the buzzer as an output device.
 minutes = 0
 constant = 0.006
 time_new = 0.0
@@ -36,6 +36,7 @@ rpt_int = int(input('Input desired report interval in seconds '))
 print('Reports every ', rpt_int,' seconds')
 print('Control C to exit')
 
+#Buzzer function
 def soundAlarm():
     BuzzerOp = GPIO.PWM(buzzerPinNum, 200)
     BuzzerOp.start(90)
