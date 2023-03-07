@@ -1,6 +1,7 @@
 import RPi.GPIO as GPIO # Imports the GPIO library
 from RPi_GPIO_i2c_LCD import lcd # Imports the LCD library
 import time, sys # Imports the time library
+import math
 GPIO.setwarnings(False)
 
 lcdDisplay = lcd.HD44780(0x27)
@@ -13,7 +14,7 @@ GPIO.setwarnings(False) # This disables GPIO warnings
 GPIO.setmode(GPIO.BCM) # This configures us to set modes using  
 GPIO.setup(buzzerPinNum, GPIO.OUT) # This configures the buzzer as an output device.
 minutes = 0
-constant = 0.006
+constant = 0.0006
 time_new = 0.0
 rpt_int = 10
 potentialLeakPresent = False
@@ -22,7 +23,7 @@ global rate_count, tot_count
 rate_count = 0
 tot_count = 0
 
-
+#Everytime the magnet passes the sensor, it counts the pulse
 def Pulse_count(waterFlowPin):
     global rate_count, tot_count
     rate_count += 1
@@ -70,18 +71,20 @@ while True:
     lcdDisplay.set(str(LperM), 3)
     lcdDisplay.set("Liters/Minute", 4)
     time.sleep(1)
+    #lcdDisplay.clear()
     
     if (LperM < 10 or LperM > 25):
         potentialLeakPresent = True
     
     if (LperM < 1):
         potentialLeakPresent = False
+        
+    if (LperM == 0):
         print('No flow')
+        
         
     if (potentialLeakPresent):
         soundAlarm()
         
 GPIO.cleanup()
 print('Done')
-
-    
